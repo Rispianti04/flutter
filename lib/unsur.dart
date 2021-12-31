@@ -88,62 +88,64 @@ class _UnsurScreenState extends State<UnsurScreen>
                 )),
             SliverFillRemaining(
               child: TabBarView(controller: controller, children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CarouselSlider(
-                        items: imageSliders,
-                        options: CarouselOptions(
-                            initialPage: 0,
-                            height: height * 0.2,
-                            enlargeCenterPage: true,
-                            autoPlay: true,
-                            aspectRatio: 16 / 9,
-                            autoPlayCurve: Curves.fastOutSlowIn,
-                            enableInfiniteScroll: true,
-                            autoPlayAnimationDuration:
-                                const Duration(seconds: 5),
-                            viewportFraction: 1.0,
-                            onPageChanged: (index, reason) {
-                              current = index;
-                              setState(() {});
-                            }),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: dot<Widget>(imageSliders, (index, url) {
-                          return Container(
-                            width: 10.0,
-                            height: 10.0,
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 2.0),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: current == index
-                                  ? Colors.redAccent
-                                  : Colors.green,
-                            ),
-                          );
-                        }),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Text(
-                        'Universitas Suryakancana Cianjur adalah salah satu perguruan tinggi swasta yang berada di kota cianjur jawa barat '
-                        'unsur mempunyai beberapa fakultas antara lain : fakultas hukum, fakultas keguruan dan ilmu pendidikan, fakultas teknik'
-                        ',fakultas ekonomi bisnis islam dan fakultas sains terapan '
-                        'Penguasaan dan pengembangan informasi di abad sekarang menuntut pelaksanaan'
-                        'pendidikan secara disiplin waktu dan konsisten. Universitas Suryakancana Cianjur (UNSUR)'
-                        'mempunyai cita-cita menjadi universitas terdepan dan unggul dari segi pengajaran, penelitian,'
-                        'dan pengabdian pada masyarakat Secara geografis, Posisi UNSUR terletak di dalam satu area luas dengan gedung yang berbeda'
-                        'sesuai dengan fakultas masing-masing Atmosfer kampus yang dikelilingi oleh hutan kota'
-                        'menjadikan UNSUR tempat yang nyaman dan asri untuk belajar',
-                        textAlign: TextAlign.justify,
-                      )
-                    ],
+                SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CarouselSlider(
+                          items: imageSliders,
+                          options: CarouselOptions(
+                              initialPage: 0,
+                              height: height * 0.2,
+                              enlargeCenterPage: true,
+                              autoPlay: true,
+                              aspectRatio: 16 / 9,
+                              autoPlayCurve: Curves.fastOutSlowIn,
+                              enableInfiniteScroll: true,
+                              autoPlayAnimationDuration:
+                                  const Duration(seconds: 5),
+                              viewportFraction: 1.0,
+                              onPageChanged: (index, reason) {
+                                current = index;
+                                setState(() {});
+                              }),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: dot<Widget>(imageSliders, (index, url) {
+                            return Container(
+                              width: 10.0,
+                              height: 10.0,
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 10.0, horizontal: 2.0),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: current == index
+                                    ? Colors.redAccent
+                                    : Colors.green,
+                              ),
+                            );
+                          }),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text(
+                          'Universitas Suryakancana Cianjur adalah salah satu perguruan tinggi swasta yang berada di kota cianjur jawa barat '
+                          'unsur mempunyai beberapa fakultas antara lain : fakultas hukum, fakultas keguruan dan ilmu pendidikan, fakultas teknik'
+                          ',fakultas ekonomi bisnis islam dan fakultas sains terapan '
+                          'Penguasaan dan pengembangan informasi di abad sekarang menuntut pelaksanaan'
+                          'pendidikan secara disiplin waktu dan konsisten. Universitas Suryakancana Cianjur (UNSUR)'
+                          'mempunyai cita-cita menjadi universitas terdepan dan unggul dari segi pengajaran, penelitian,'
+                          'dan pengabdian pada masyarakat Secara geografis, Posisi UNSUR terletak di dalam satu area luas dengan gedung yang berbeda'
+                          'sesuai dengan fakultas masing-masing Atmosfer kampus yang dikelilingi oleh hutan kota'
+                          'menjadikan UNSUR tempat yang nyaman dan asri untuk belajar',
+                          textAlign: TextAlign.justify,
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Padding(
@@ -170,6 +172,29 @@ class _UnsurScreenState extends State<UnsurScreen>
                   ),
                 )
               ]),
+            )
+          ],
+        ),
+      ),
+      bottomSheet: Container(
+        color: Colors.white,
+        height: height * 0.1,
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: const <Widget>[
+                Icon(Icons.star, color: Colors.yellow),
+                Icon(Icons.star, color: Colors.yellow),
+                Icon(Icons.star, color: Colors.yellow),
+                Icon(Icons.star, color: Colors.yellow),
+                Icon(Icons.star),
+              ],
+            ),
+            const Text(
+              '140 Riview',
+              style: TextStyle(color: Colors.black),
             )
           ],
         ),
