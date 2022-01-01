@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jurusan/mainscreen.dart';
-import 'package:jurusan/unsur.dart';
 
 void main() {
   runApp(const MyApp());

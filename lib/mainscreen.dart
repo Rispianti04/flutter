@@ -1,6 +1,4 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:jurusan/model/model_unsur.dart';
 import 'package:jurusan/teknik.dart';
 import 'package:jurusan/unsur.dart';
 
@@ -13,50 +11,37 @@ class Mainscreen extends StatefulWidget {
 
 class _MainscreenState extends State<Mainscreen>
     with SingleTickerProviderStateMixin {
-  List<Widget> imageSliders = [];
-  List<Unsur> listdummy = [
-    Unsur(id: 0, image: 'assets/wisuda2.jpg.600x400_q85.jpg'),
-    Unsur(id: 1, image: 'assets/ft.jpg'),
-    Unsur(id: 2, image: 'assets/26-4-2019 (3).jpg'),
-    Unsur(id: 3, image: 'assets/teknik.jpg'),
-  ];
   TabController? controller;
+
   int current = 0;
   bool pinned = true;
   bool snap = false;
   bool floating = false;
+  //list tab merupakan penamaan pada tabbar
   static const List<Tab> myTabs = <Tab>[
     Tab(text: 'Unsur'),
     Tab(text: 'Fakultas Teknik'),
   ];
   @override
   void initState() {
+    //inisial untuk tabbar view dengan penambahan pada ujung kelas memakai with SingleTickerProviderStateMixin
     controller = TabController(vsync: this, length: myTabs.length);
     super.initState();
-  }
-
-  List<T> dot<T>(List list, Function handler) {
-    List<T> result = [];
-    for (var i = 0; i < list.length; i++) {
-      result.add(handler(i, list[i]));
-    }
-    return result;
   }
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            // ignore: prefer_const_constructors
+            //image header
             SliverPersistentHeader(
-              delegate: Delegate(Colors.black, '_title'),
+              delegate: SliverHeader(), //memanggil kelas sliverheader
             ),
+            //menampilkan jumlah tabbar sesuai dari list tabbar
             SliverAppBar(
                 backgroundColor: Colors.white,
                 floating: true,
@@ -76,14 +61,21 @@ class _MainscreenState extends State<Mainscreen>
                     tabs: myTabs,
                   ),
                 )),
+            //menampilkan isi content dari tab
             SliverFillRemaining(
-              child: TabBarView(
-                  controller: controller,
-                  children: const <Widget>[UnsurScreen(), TeknikScreen()]),
+              child:
+                  TabBarView(controller: controller, children: const <Widget>[
+                //memanggil kelas unsur dari tabbar unsur sampai sebelum bottomsheet
+                UnsurScreen(),
+                //memanggil kelas teknik
+                TeknikScreen()
+              ]),
             )
           ],
         ),
       ),
+      //menampilkan widget yang berada pada bagian bawah layar seperti ratingrate dan review
+      //note: widget ini akan tampilkan pada kelas unsur dan teknik karna masing termasuk satu screen
       bottomSheet: Container(
         color: Colors.white,
         height: height * 0.1,
@@ -111,12 +103,8 @@ class _MainscreenState extends State<Mainscreen>
   }
 }
 
-class Delegate extends SliverPersistentHeaderDelegate {
-  final Color backgroundColor;
-  final String _title;
-
-  Delegate(this.backgroundColor, this._title);
-
+//merupakan class untuk handle header image memakai  SliverPersistentHeader
+class SliverHeader extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
